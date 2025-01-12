@@ -1,5 +1,5 @@
 import * as Phaser from 'phaser';
-import { SCENE_KEYS } from './common';
+import { ASSET_KEYS, CARD_HEIGHT, CARD_WIDTH, SCENE_KEYS } from './common';
 
 export class PreloadScene extends Phaser.Scene {
   constructor() {
@@ -7,9 +7,14 @@ export class PreloadScene extends Phaser.Scene {
   }
 
   public preload(): void {
-    // load assets
+    this.load.image(ASSET_KEYS.TITLE, 'assets/images/title.png');
+    this.load.image(ASSET_KEYS.CLICK_TO_START, 'assets/images/clickToStart.png');
+    this.load.spritesheet(ASSET_KEYS.CARDS, 'assets/images/cards.png', {
+      frameWidth: CARD_WIDTH,
+      frameHeight: CARD_HEIGHT,
+    });
   }
-
+  // phaser handles it its own it waits for preload to laod our assets and then invoke the create method
   public create(): void {
     this.scene.start(SCENE_KEYS.TITLE);
   }
